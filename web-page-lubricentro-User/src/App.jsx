@@ -16,6 +16,10 @@ function App() {
           <Route path="/mechanic/*" element={<MechanicPage />} />
           <Route path="/orden/*" element={<OrdenPage />} />
           <Route path="notifications" element={<UserNotificationsPage />} />
+          <Route
+            path="/comentarios-valoraciones"
+            element={<ComentariosValoraciones />}
+          />
         </Routes>
       </Router>
     </div>
