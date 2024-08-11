@@ -1,14 +1,21 @@
-import React from 'react';
-import AppHeader from './components/Login/header';
-
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import AppHeader from './components/Login/header'
+import IngresosPage from './components/Contability/Ingresos'
+//import EgresosPage from './components/Contability/Egresos'
+//import ReportesPage from './components/Contability/Reportes'
 
 function App() {
     return (
-        <div className="App">
-            <header id="header">
+        <Router>
+            <div className="App">
                 <AppHeader />
-            </header>
-        </div>
+                <Routes>
+                    <Route path="/ingresos" element={<IngresosPage />} />
+                    <Route path="/" element={<h1>Home</h1>} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 
