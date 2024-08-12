@@ -4,6 +4,7 @@ import AppHeader from "./components/Login/header";
 import MechanicPage from "./pages/MechanicPage";
 import OrdenPage from "./pages/OrdenPage";
 import UserNotificationsPage from "./pages/UserNotificationsPage";
+import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
 
 function App() {
   return (
