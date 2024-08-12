@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppHeader from "./components/HeaderFooter/header";
-import MechanicPage from "./pages/MechanicPage";
 import OrdenPage from "./pages/OrdenPage";
 import UserNotificationsPage from "./pages/UserNotificationsPage";
 import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
