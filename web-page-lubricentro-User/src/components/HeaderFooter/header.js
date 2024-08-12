@@ -24,6 +24,9 @@ export default function AppHeader() {
             <Nav.Link as={NavLink} to="/comentarios-valoraciones">
               Opiniones
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/Login">
+              Iniciar Sesión
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
