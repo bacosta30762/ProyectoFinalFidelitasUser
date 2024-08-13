@@ -61,6 +61,7 @@ export default function AppHeader() {
                   cursor: "pointer",
                   display: "flex",
                   alignItems: "center",
+                  color: "#fff", // Cambia el color del ícono a blanco
                 }}
               >
                 <Bell size={20} />
