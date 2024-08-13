@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppHeader from "./components/HeaderFooter/header";
-import OrdenPage from "./pages/OrdenPage";
 import UserNotificationsPage from "./pages/UserNotificationsPage";
 import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
 import Footer from "./components/HeaderFooter/Footer";
@@ -10,6 +9,8 @@ import Registro from "./components/Login/registro.jsx";
 import RecuperarContra from "./components/Login/recuperarcontra.jsx";
 import Home from "./components/Home/Home";
 import Calendar from "./components/Planificacion/Calendar";
+import CreateOrdenPage from "./pages/CreateOrdenPage.jsx";
+import FakeOrdenListPage from "./pages/FakeOrdenListPage.jsx";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
           <Route path="/Login/" element={<Login />} />
           <Route path="/RecuperarContra/" element={<RecuperarContra />} />
           <Route path="/Registro/" element={<Registro />} />
-          <Route path="/orden/*" element={<OrdenPage />} />
+          <Route path="/crear-orden/*" element={<CreateOrdenPage />} />
+          <Route path="/listar-ordenes/*" element={<FakeOrdenListPage />} />
           <Route path="notifications" element={<UserNotificationsPage />} />
           <Route
             path="/comentarios-valoraciones"

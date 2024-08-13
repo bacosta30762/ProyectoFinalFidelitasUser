@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FakeOrdenList = () => {
+const FakeOrdenListPage = () => {
   // Nombre del cliente para el header (puedes cambiarlo dinámicamente según sea necesario)
   const clienteNombre = "Juan Pérez";
 
@@ -114,4 +114,4 @@ const FakeOrdenList = () => {
   );
 };
 
-export default FakeOrdenList;
+export default FakeOrdenListPage;
