@@ -31,6 +31,14 @@ export default function AppHeader() {
                 Listar Ordenes
               </NavDropdown.Item>
             </NavDropdown>
+            <NavDropdown title="Suscripciones" id="subscription-nav-dropdown">
+              <NavDropdown.Item as={NavLink} to="/ver-suscripciones">
+                Ver Suscripciones
+              </NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/crear-suscripcion">
+                Crear Suscripción
+              </NavDropdown.Item>
+            </NavDropdown>
             <Nav.Link as={NavLink} to="/calendario">
               Disponibilidad Citas
             </Nav.Link>

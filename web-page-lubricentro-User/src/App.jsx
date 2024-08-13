@@ -11,6 +11,8 @@ import Home from "./components/Home/Home";
 import Calendar from "./components/Planificacion/Calendar";
 import CreateOrdenPage from "./pages/CreateOrdenPage.jsx";
 import FakeOrdenListPage from "./pages/FakeOrdenListPage.jsx";
+import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx"; // Importar CrearSuscripcionPage
+import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx"; // Importar VerSuscripcionesPage
 
 function App() {
   return (
@@ -32,6 +34,16 @@ function App() {
             element={<ComentariosValoraciones />}
           />
           <Route path="calendario" element={<Calendar />} />
+          <Route
+            path="/ver-suscripciones"
+            element={<VerSuscripcionesPage />}
+          />{" "}
+          {/* Nueva ruta para Ver Suscripciones */}
+          <Route
+            path="/crear-suscripcion"
+            element={<CrearSuscripcionPage />}
+          />{" "}
+          {/* Nueva ruta para Crear Suscripción */}
         </Routes>
       </Router>
       <footer id="footer">
