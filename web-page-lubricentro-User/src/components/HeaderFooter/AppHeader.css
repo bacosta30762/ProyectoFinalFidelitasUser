@@ -15,3 +15,12 @@
 .navbar-brand {
   color: #ffffff !important; /* Color de la marca en el navbar */
 }
+.profile-icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-icon:hover {
+  color: #ddd;
+}

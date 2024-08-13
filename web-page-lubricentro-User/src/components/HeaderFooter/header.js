@@ -5,6 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavDropdown, Dropdown, Badge } from "react-bootstrap";
 import { Bell } from "react-bootstrap-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import "./AppHeader.css"; // Importa el archivo CSS personalizado
 
 export default function AppHeader() {
@@ -48,6 +50,10 @@ export default function AppHeader() {
             <Nav.Link as={NavLink} to="/Login">
               Iniciar Sesión
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/Perfil">
+              <FontAwesomeIcon icon={faUser} className="profile-icon" />
+            </Nav.Link>
+
             <Dropdown
               align="end"
               show={showNotifications}
