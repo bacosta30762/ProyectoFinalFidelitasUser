@@ -18,6 +18,9 @@ export default function AppHeader() {
             <Nav.Link as={NavLink} to="/orden">
               Ordenes
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/calendario">
+              Disponibilidad Citas
+            </Nav.Link>
             <Nav.Link as={NavLink} to="/notifications">
               Notificaciones
             </Nav.Link>

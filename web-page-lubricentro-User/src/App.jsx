@@ -9,6 +9,7 @@ import Login from "./components/Login/login.jsx";
 import Registro from "./components/Login/registro.jsx";
 import RecuperarContra from "./components/Login/recuperarcontra.jsx";
 import Home from "./components/Home/Home";
+import Calendar from "./components/Planificacion/Calendar";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             path="/comentarios-valoraciones"
             element={<ComentariosValoraciones />}
           />
+          <Route path="calendario" element={<Calendar />} />
         </Routes>
       </Router>
       <footer id="footer">
