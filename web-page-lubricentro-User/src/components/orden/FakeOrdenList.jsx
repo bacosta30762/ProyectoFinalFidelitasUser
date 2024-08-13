@@ -48,14 +48,15 @@ const FakeOrdenList = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Función para filtrar las órdenes según el término de búsqueda
-  const filteredOrdenes = ordenes.filter(
-    (orden) =>
-      orden.numeroOrden.includes(searchTerm) ||
-      orden.placaVehiculo.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      orden.servicio.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      orden.monto.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      orden.fecha.includes(searchTerm) ||
-      orden.mecanico.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredOrdenes = ordenes.filter((orden) =>
+    [
+      "numeroOrden",
+      "placaVehiculo",
+      "servicio",
+      "monto",
+      "fecha",
+      "mecanico",
+    ].some((key) => orden[key].toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -67,7 +68,11 @@ const FakeOrdenList = () => {
         placeholder="Buscar órdenes..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: "20px", padding: "10px", width: "100%" }}
+        style={{
+          marginBottom: "20px",
+          padding: "10px",
+          width: "100%",
+        }}
       />
       <div
         style={{
@@ -76,25 +81,18 @@ const FakeOrdenList = () => {
           gap: "10px",
         }}
       >
-        <div>
-          <strong>Número de Orden</strong>
-        </div>
-        <div>
-          <strong>Placa del Vehículo</strong>
-        </div>
-        <div>
-          <strong>Servicio Prestado</strong>
-        </div>
-        <div>
-          <strong>Monto</strong>
-        </div>
-        <div>
-          <strong>Fecha</strong>
-        </div>
-        <div>
-          <strong>Mecánico</strong>
-        </div>
-
+        {[
+          "Número de Orden",
+          "Placa del Vehículo",
+          "Servicio Prestado",
+          "Monto",
+          "Fecha",
+          "Mecánico",
+        ].map((header) => (
+          <div key={header}>
+            <strong>{header}</strong>
+          </div>
+        ))}
         {filteredOrdenes.length > 0 ? (
           filteredOrdenes.map((orden) => (
             <React.Fragment key={orden.id}>
