@@ -7,8 +7,7 @@ import { NavDropdown, Dropdown, Badge } from "react-bootstrap";
 import { Bell } from "react-bootstrap-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import "./AppHeader.css"; // Importa el archivo CSS personalizado
-
+import "./AppHeader.css"; 
 export default function AppHeader() {
   const [showNotifications, setShowNotifications] = useState(false);
 
