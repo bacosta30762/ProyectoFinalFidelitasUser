@@ -15,7 +15,8 @@ import CreateOrdenPage from "./pages/CreateOrdenPage.jsx";
 import FakeOrdenListPage from "./pages/FakeOrdenListPage.jsx";
 import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx"; 
 import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx"; 
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import RestablecerPassword from './components/Login/RestablecerPassword.jsx'; 
 
 function App() {
   const token = localStorage.getItem('token'); // Verifica si el usuario está autenticado
@@ -30,13 +31,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login/" element={<Login />} />
           <Route path="/RecuperarContra/" element={<RecuperarContra />} />
+          <Route path="/restablecer-password" element={<RestablecerPassword />} />
+          <Route path="/Registro" element={<Registro />}/>
           <Route
             path="/comentarios-valoraciones"
             element={<ComentariosValoraciones />}
           />
           {/* Rutas protegidas */}      
           <Route path="/Perfil/" element={<ProtectedRoute><Perfil /></ProtectedRoute>}/>
-          <Route path="/Registro/" element={<ProtectedRoute><Registro /></ProtectedRoute>} />
           <Route path="/crear-orden/*" element={<ProtectedRoute><CreateOrdenPage /></ProtectedRoute>} />
           <Route path="/listar-ordenes/*" element={<ProtectedRoute><FakeOrdenListPage /></ProtectedRoute>} />
           <Route path="notifications" element={<ProtectedRoute><UserNotificationsPage /></ProtectedRoute>} />
