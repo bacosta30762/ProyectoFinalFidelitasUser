@@ -14,9 +14,12 @@ import Calendar from "./components/Planificacion/Calendar";
 import CreateOrdenPage from "./pages/CreateOrdenPage.jsx";
 import FakeOrdenListPage from "./pages/FakeOrdenListPage.jsx";
 import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx"; 
-import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx"; 
+import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx"; 
 
 function App() {
+  const token = localStorage.getItem('token'); // Verifica si el usuario está autenticado
+
   return (
     <div className="App">
       <Router>
@@ -27,25 +30,27 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login/" element={<Login />} />
           <Route path="/RecuperarContra/" element={<RecuperarContra />} />
-          <Route path="/Perfil/" element={<Perfil/>} />
-          <Route path="/Registro/" element={<Registro />} />
-          <Route path="/crear-orden/*" element={<CreateOrdenPage />} />
-          <Route path="/listar-ordenes/*" element={<FakeOrdenListPage />} />
-          <Route path="notifications" element={<UserNotificationsPage />} />
-          <Route path="/perfileditar/:id" element={<Perfileditar />} />
           <Route
             path="/comentarios-valoraciones"
             element={<ComentariosValoraciones />}
           />
-          <Route path="calendario" element={<Calendar />} />
+          {/* Rutas protegidas */}      
+          <Route path="/Perfil/" element={<ProtectedRoute><Perfil /></ProtectedRoute>}/>
+          <Route path="/Registro/" element={<ProtectedRoute><Registro /></ProtectedRoute>} />
+          <Route path="/crear-orden/*" element={<ProtectedRoute><CreateOrdenPage /></ProtectedRoute>} />
+          <Route path="/listar-ordenes/*" element={<ProtectedRoute><FakeOrdenListPage /></ProtectedRoute>} />
+          <Route path="notifications" element={<ProtectedRoute><UserNotificationsPage /></ProtectedRoute>} />
+          <Route path="/perfileditar/:id" element={<ProtectedRoute><Perfileditar /></ProtectedRoute>} />
+          
+          <Route path="calendario" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
           <Route
             path="/ver-suscripciones"
-            element={<VerSuscripcionesPage />}
+            element={<ProtectedRoute><VerSuscripcionesPage /></ProtectedRoute>}
           />{" "}
           {/* Nueva ruta para Ver Suscripciones */}
           <Route
             path="/crear-suscripcion"
-            element={<CrearSuscripcionPage />}
+            element={<ProtectedRoute><CrearSuscripcionPage /></ProtectedRoute>}
           />{" "}
           {/* Nueva ruta para Crear Suscripción */}
         </Routes>
