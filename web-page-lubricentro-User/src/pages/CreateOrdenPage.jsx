@@ -1,28 +1,30 @@
+// src/CreateOrdenPage.js
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../redux/actions/orderActions";
 
 const CreateOrdenPage = () => {
-  const [orderNumber, setOrderNumber] = useState(1);
   const [vehiclePlate, setVehiclePlate] = useState("");
   const [serviceProvided, setServiceProvided] = useState("");
   const [date, setDate] = useState("");
-  const [orders, setOrders] = useState([]);
+  const orders = useSelector((state) => state.orders.orders);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newOrder = {
-      orderNumber,
+      orderNumber: orders.length + 1, // Genera el número de orden incremental
       vehiclePlate,
       serviceProvided,
       date,
     };
-    setOrders([...orders, newOrder]);
-    setOrderNumber(orderNumber + 1);
+    dispatch(createOrder(newOrder)); // Despacha la acción para crear la orden
     setVehiclePlate("");
     setServiceProvided("");
     setDate("");
   };
 
-  const today = new Date().toISOString().split("T")[0]; // Fecha actual en formato YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto" }}>
@@ -37,7 +39,7 @@ const CreateOrdenPage = () => {
           </label>
           <input
             type="text"
-            value={orderNumber}
+            value={orders.length + 1}
             readOnly
             style={{
               width: "100%",
@@ -80,7 +82,7 @@ const CreateOrdenPage = () => {
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required
-            min={today} // No permitir seleccionar fechas anteriores a la actual
+            min={today}
             style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
           />
         </div>
