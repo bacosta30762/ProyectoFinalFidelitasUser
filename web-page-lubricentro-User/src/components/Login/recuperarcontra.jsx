@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import { recoverPasswordSchema } from '../Validaciones/recoverPasswordValidation'; 
+import ValidatedInput from "../Validaciones/inputValidation";
 import "../Estilos/recuperar.css";
 
 const RecoverPassword = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleRecoverPassword = async (e) => {
-    e.preventDefault();
-
-    const recuperarPasswordDto = {
-      correo: email
-    };
+  const handleRecoverPassword = async (values, { setSubmitting }) => {
+    const recuperarPasswordDto = { correo: values.email };
 
     try {
       const response = await fetch('https://localhost:7180/api/Usuarios/RecuperarContraseña', {
@@ -31,11 +29,12 @@ const RecoverPassword = () => {
         setSuccess("Correo de recuperación enviado. Revisa tu bandeja de entrada.");
         setTimeout(() => {
           navigate('/restablecer-password');
-        }, 3000); // Redirige después de 3 segundos
+        }, 3000);
       }
     } catch (error) {
       setError("Error en la conexión.");
     }
+    setSubmitting(false);
   };
 
   return (
@@ -43,17 +42,25 @@ const RecoverPassword = () => {
       <h1 className="recover-password-title">Recuperar Contraseña</h1>
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
-      <form className="recover-password-form" onSubmit={handleRecoverPassword}>
-        <input
-          type="email"
-          placeholder="Correo Electrónico"
-          className="recover-password-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <button type="submit" className="recover-password-button">Enviar</button>
-      </form>
+      <Formik
+        initialValues={{ email: '' }}
+        validationSchema={recoverPasswordSchema}
+        onSubmit={handleRecoverPassword}
+      >
+        {({ isSubmitting }) => (
+          <Form className="recover-password-form">
+            <ValidatedInput
+              name="email"
+              type="email"
+              placeholder="Correo Electrónico"
+              className="recover-password-input"
+            />
+            <button type="submit" className="recover-password-button" disabled={isSubmitting}>
+              Enviar
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

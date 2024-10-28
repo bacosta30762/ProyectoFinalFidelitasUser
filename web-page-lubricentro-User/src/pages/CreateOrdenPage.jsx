@@ -1,56 +1,68 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const CreateOrdenPage = () => {
-  const [orderNumber, setOrderNumber] = useState(1);
+  const location = useLocation();
+  const { selectedDate, hour } = location.state || {};
   const [vehiclePlate, setVehiclePlate] = useState("");
   const [serviceProvided, setServiceProvided] = useState("");
-  const [date, setDate] = useState("");
-  const [orders, setOrders] = useState([]);
+  const [date, setDate] = useState(selectedDate ? selectedDate.toISOString().split('T')[0] : "");
 
-  const handleSubmit = (e) => {
+  // Servicios por defecto
+  const services = [
+    { id: 1, name: "Cambio de aceite" },
+    { id: 2, name: "Mecánica rápida" },
+    { id: 3, name: "Revisión y cambio de llantas" },
+  ];
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newOrder = {
-      orderNumber,
-      vehiclePlate,
-      serviceProvided,
-      date,
-    };
-    setOrders([...orders, newOrder]);
-    setOrderNumber(orderNumber + 1);
-    setVehiclePlate("");
-    setServiceProvided("");
-    setDate("");
-  };
+    
+    // Obtener el ID del servicio basado en el nombre seleccionado
+    const selectedService = services.find(service => service.name === serviceProvided);
+    
+    if (!selectedService) {
+      alert("Seleccione un servicio válido.");
+      return;
+    }
 
-  const today = new Date().toISOString().split("T")[0]; // Fecha actual en formato YYYY-MM-DD
+    // Obtener el token 
+    const token = localStorage.getItem("token");
+
+    const dto = {
+      ServicioId: selectedService.id,
+      PlacaVehiculo: vehiclePlate,
+      Hora: parseInt(hour.split(':')[0]), 
+      Dia: new Date(date).toISOString().split('T')[0] 
+    };
+
+    try {
+      const response = await fetch("https://localhost:7180/api/Ordenes/crear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify(dto),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert(errorData.errors ? errorData.errors : "Error al crear la orden.");
+      } else {
+        alert("Orden creada con éxito.");
+      }
+    } catch (error) {
+      alert("Error en la conexión.");
+    }
+  };
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto" }}>
       <h1>Detalle de Orden de Servicio</h1>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column" }}
-      >
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ marginBottom: "10px" }}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
-            Número de Orden:
-          </label>
-          <input
-            type="text"
-            value={orderNumber}
-            readOnly
-            style={{
-              width: "100%",
-              padding: "8px",
-              boxSizing: "border-box",
-              backgroundColor: "#f0f0f0",
-            }}
-          />
-        </div>
-        <div style={{ marginBottom: "10px" }}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
-            Placa del Vehículo:
-          </label>
+          <label style={{ display: "block", marginBottom: "5px" }}>Placa del Vehículo:</label>
           <input
             type="text"
             value={vehiclePlate}
@@ -60,28 +72,37 @@ const CreateOrdenPage = () => {
           />
         </div>
         <div style={{ marginBottom: "10px" }}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
-            Servicio Prestado:
-          </label>
-          <input
-            type="text"
+          <label style={{ display: "block", marginBottom: "5px" }}>Servicio Prestado:</label>
+          <select
             value={serviceProvided}
             onChange={(e) => setServiceProvided(e.target.value)}
             required
             style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
-          />
+          >
+            <option value="">Seleccione un servicio</option>
+            {services.map((service) => (
+              <option key={service.id} value={service.name}>
+                {service.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div style={{ marginBottom: "10px" }}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
-            Fecha:
-          </label>
+          <label style={{ display: "block", marginBottom: "5px" }}>Fecha:</label>
           <input
             type="date"
             value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            min={today} // No permitir seleccionar fechas anteriores a la actual
-            style={{ width: "100%", padding: "8px", boxSizing: "border-box" }}
+            readOnly
+            style={{ width: "100%", padding: "8px", boxSizing: "border-box", backgroundColor: "#f0f0f0" }}
+          />
+        </div>
+        <div style={{ marginBottom: "10px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>Hora:</label>
+          <input
+            type="text"
+            value={hour}
+            readOnly
+            style={{ width: "100%", padding: "8px", boxSizing: "border-box", backgroundColor: "#f0f0f0" }}
           />
         </div>
         <button
@@ -97,38 +118,6 @@ const CreateOrdenPage = () => {
           Crear Orden
         </button>
       </form>
-
-      {orders.length > 0 && (
-        <div style={{ marginTop: "20px" }}>
-          <h2>Órdenes Creadas:</h2>
-          <ul style={{ listStyleType: "none", padding: 0 }}>
-            {orders.map((order) => (
-              <li
-                key={order.orderNumber}
-                style={{
-                  marginBottom: "10px",
-                  padding: "10px",
-                  border: "1px solid #ddd",
-                  borderRadius: "5px",
-                }}
-              >
-                <p>
-                  <strong>Número de Orden:</strong> {order.orderNumber}
-                </p>
-                <p>
-                  <strong>Placa del Vehículo:</strong> {order.vehiclePlate}
-                </p>
-                <p>
-                  <strong>Servicio Prestado:</strong> {order.serviceProvided}
-                </p>
-                <p>
-                  <strong>Fecha:</strong> {order.date}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

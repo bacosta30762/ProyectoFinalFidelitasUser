@@ -1,0 +1,10 @@
+.select-service-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+select, button {
+  margin-top: 10px;
+}

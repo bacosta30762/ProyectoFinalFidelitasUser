@@ -1,7 +1,16 @@
+/* Asegura que la sección principal ocupe el ancho completo */
+body, html {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .services-section {
   text-align: center;
   padding: 50px 20px;
   background-color: #f8f9fa;
+  width: 100vw; /* Usar todo el ancho del viewport */
+  max-width: 100%;
 }
 
 .services-title {
@@ -13,6 +22,7 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .service-item {
@@ -32,9 +42,16 @@
   margin-top: 10px;
 }
 
-.carousel-img {
-  width: 100 !important;
-  height: 500px;
-  object-fit: cover; 
-  margin: 0 auto;
+/* Asegura que el contenedor del carrusel ocupe todo el ancho */
+.carousel {
+  width: 100vw; /* Usa toda la anchura del viewport */
+  max-width: 100%;
+  margin: 0;
 }
+
+.carousel-img {
+  width: 100vw; /* Asegúrate de que las imágenes del carrusel ocupen todo el viewport */
+  height: 500px; /* Ajusta esta altura si lo necesitas */
+  object-fit: cover;
+}
+

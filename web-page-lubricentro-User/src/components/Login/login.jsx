@@ -1,47 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Estilos/login.css";
+import { loginValidationSchema } from "../Validaciones/loginValidation";
+import { saveToken } from "../Servicios/tokenService";
+import ValidatedInput from "../Validaciones/inputValidation";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
+  const handleLogin = async (values, { setSubmitting, setErrors }) => {
     const loginDto = {
-      email: email,
-      password: password,
+      email: values.email,
+      password: values.password,
     };
 
     try {
-      const response = await fetch(
-        "https://localhost:7180/api/Usuarios/Login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loginDto),
-        }
-      );
+      const response = await fetch("https://localhost:7180/api/Usuarios/Login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginDto),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
-        setError(errorData.errors || "Datos incorrectos.");
+        setErrors({ email: errorData.errors || "Datos incorrectos" });
       } else {
         const data = await response.json();
-        localStorage.setItem("token", data.token); // Guardar el token en localStorage
-        navigate("/"); // Redirigir a la página principal o a la deseada
+        saveToken(data.token);
+        navigate("/");
       }
     } catch (error) {
-      setError("Error en la conexión.");
+      setErrors({ email: "Error en la conexión." });
+    } finally {
+      setSubmitting(false);
     }
   };
-  
+
   const handleRegister = () => {
     navigate("/Registro");
   };
@@ -52,42 +50,38 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2 className="login-title">Login</h2>
-      {error && (
-        <div className="error-message">
-          {typeof error === "string" ? (
-            <p>{error}</p>
-          ) : (
-            error.map((msg, index) => <p key={index}>{msg}</p>)
-          )}
-        </div>
-      )}
-      <form className="login-form" onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Correo"
-          className="login-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} // Captura de correo
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          className="login-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} // Captura de contraseña
-        />
-        <button type="submit" className="login-button">
-          Iniciar Sesión
-        </button>
-      </form>
+      <h2 className="login-title">Ingresar al sistema</h2>
+
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={loginValidationSchema}
+        onSubmit={handleLogin}
+      >
+        {({ isSubmitting }) => (
+          <Form className="login-form">
+            <ValidatedInput
+              name="email"
+              type="email"
+              placeholder="Correo"
+              className="login-input"
+            />
+            <ValidatedInput
+              name="password"
+              type="password"
+              placeholder="Contraseña"
+              className="login-input"
+            />
+            <button type="submit" className="login-button" disabled={isSubmitting}>
+              Iniciar Sesión
+            </button>
+          </Form>
+        )}
+      </Formik>
+
       <div className="login-options">
-        <button
-          className="forgot-password-link"
-          onClick={handleRecoverPassword}
-        >
+        <span className="forgot-password-link" onClick={handleRecoverPassword}>
           Recuperar contraseña
-        </button>
+        </span>
         <button className="register-button" onClick={handleRegister}>
           Registrar
         </button>

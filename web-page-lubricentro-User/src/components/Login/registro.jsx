@@ -1,26 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Formik, Form } from "formik";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Estilos/registro.css";
+import { registroValidationSchema } from "../Validaciones/registroValidation";
+import ValidatedInput from "../Validaciones/inputValidation";
+
 
 const Registro = () => {
   const navigate = useNavigate();
-  const [correo, setCorreo] = useState("");
-  const [contraseña, setContraseña] = useState("");
-  const [nombre, setNombre] = useState("");
-  const [apellidos, setApellidos] = useState("");
-  const [cedula, setCedula] = useState("");
-  const [error, setError] = useState("");
+  const [isSuccessModalVisible, setSuccessModalVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
+  const handleRegister = async (values, { setSubmitting, setErrors }) => {
     const registroDto = {
-      correo,
-      contraseña,
-      nombre,
-      apellidos,
-      cedula,
+      correo: values.correo,
+      contraseña: values.contraseña,
+      nombre: values.nombre,
+      apellidos: values.apellidos,
+      cedula: values.cedula,
     };
 
     try {
@@ -34,68 +32,97 @@ const Registro = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        setError(errorData.errors || "Error al registrar.");
+        setErrors({ server: errorData.errors || "Error al registrar." });
       } else {
-        alert("Registro exitoso. Ahora puede iniciar sesión.");
-        navigate("/Login");
+        const successData = await response.json();
+        setSuccessMessage(successData.message || "Registro exitoso. Ahora puede iniciar sesión.");
+        setSuccessModalVisible(true);
       }
     } catch (error) {
-      setError("Error en la conexión.");
+      setErrors({ server: "Error en la conexión." });
+    } finally {
+      setSubmitting(false);
     }
+  };
+
+  const closeModalAndRedirect = () => {
+    setSuccessModalVisible(false);
+    navigate("/Login");
   };
 
   return (
     <div className="register-container">
       <h2 className="register-title">Registro</h2>
-      {error && <div className="error-message">{typeof error === "string" ? <p>{error}</p> : error.map((msg, index) => <p key={index}>{msg}</p>)}</div>}
-      <form className="register-form" onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Nombre"
-          className="register-input"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Apellidos"
-          className="register-input"
-          value={apellidos}
-          onChange={(e) => setApellidos(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Correo"
-          className="register-input"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          className="register-input"
-          value={contraseña}
-          onChange={(e) => setContraseña(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Cédula"
-          className="register-input"
-          value={cedula}
-          onChange={(e) => setCedula(e.target.value)}
-          required
-        />
-        <button type="submit" className="register-button">
-          Registrar
-        </button>
-      </form>
+      <Formik
+        initialValues={{
+          nombre: "",
+          apellidos: "",
+          correo: "",
+          contraseña: "",
+          cedula: "",
+        }}
+        validationSchema={registroValidationSchema}
+        onSubmit={handleRegister}
+      >
+        {({ isSubmitting, errors }) => (
+          <Form className="register-form">
+            {errors.server && <div className="error-message">{errors.server}</div>}
+
+            <ValidatedInput
+              name="nombre"
+              type="text"
+              placeholder="Nombre"
+              className="register-input"
+            />
+
+            <ValidatedInput
+              name="apellidos"
+              type="text"
+              placeholder="Apellidos"
+              className="register-input"
+            />
+
+            <ValidatedInput
+              name="correo"
+              type="email"
+              placeholder="Correo"
+              className="register-input"
+            />
+
+            <ValidatedInput
+              name="contraseña"
+              type="password"
+              placeholder="Contraseña"
+              className="register-input"
+            />
+
+            <ValidatedInput
+              name="cedula"
+              type="text"
+              placeholder="Cédula"
+              className="register-input"
+            />
+
+            <button type="submit" className="register-button" disabled={isSubmitting}>
+              Registrar
+            </button>
+          </Form>
+        )}
+      </Formik>
+
+      {isSuccessModalVisible && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h4>Registro exitoso</h4>
+            <p>{successMessage}</p>
+            <button className="modal-button" onClick={closeModalAndRedirect}>
+              Aceptar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Registro;
-

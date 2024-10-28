@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form} from 'formik';
+import { resetPasswordSchema } from '../Validaciones/recoverPasswordValidation'; 
+import ValidatedInput from '../Validaciones/inputValidation';
+
 import "../Estilos/recuperar.css";
 
 const RestablecerPassword = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
-  const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handleRestablecerPassword = async (e) => {
-    e.preventDefault();
-
+  const handleRestablecerPassword = async (values, { setSubmitting }) => {
     const restablecerPasswordDto = {
-      correo: email,
-      token: token,
-      nuevaPassword: newPassword
+      correo: values.email,
+      token: values.token,
+      nuevaPassword: values.newPassword,
     };
 
     try {
@@ -35,11 +34,12 @@ const RestablecerPassword = () => {
         setSuccess("Contraseña restablecida correctamente. Redirigiendo a iniciar sesión...");
         setTimeout(() => {
           navigate('/Login');
-        }, 3000); // Redirige después de 3 segundos
+        }, 3000);
       }
     } catch (error) {
       setError("Error en la conexión.");
     }
+    setSubmitting(false);
   };
 
   return (
@@ -47,35 +47,40 @@ const RestablecerPassword = () => {
       <h1 className="recover-password-title">Restablecer Contraseña</h1>
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
-      <form className="recover-password-form" onSubmit={handleRestablecerPassword}>
-        <input
-          type="email"
-          placeholder="Correo Electrónico"
-          className="recover-password-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Token de Recuperación"
-          className="recover-password-input"
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Nueva Contraseña"
-          className="recover-password-input"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="recover-password-button">Restablecer Contraseña</button>
-      </form>
+      <Formik
+        initialValues={{ email: '', token: '', newPassword: '' }}
+        validationSchema={resetPasswordSchema}
+        onSubmit={handleRestablecerPassword}
+      >
+        {({ isSubmitting }) => (
+          <Form className="recover-password-form">
+            <ValidatedInput
+              name="email"
+              type="email"
+              placeholder="Correo Electrónico"
+              className="recover-password-input"
+            />
+            <ValidatedInput
+              name="token"
+              type="text"
+              placeholder="Token de Recuperación"
+              className="recover-password-input"
+            />
+            <ValidatedInput
+              name="newPassword"
+              type="password"
+              placeholder="Nueva Contraseña"
+              className="recover-password-input"
+            />
+            <button type="submit" className="recover-password-button" disabled={isSubmitting}>
+              Restablecer Contraseña
+            </button>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
 
 export default RestablecerPassword;
+

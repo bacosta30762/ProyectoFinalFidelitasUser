@@ -1,14 +1,37 @@
+/* Aplica un mínimo de altura para todo el cuerpo */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
+/* Asegúrate de que el contenedor principal use flexbox para centrar contenido */
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header, footer {
+  flex-shrink: 0;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Un poco de padding para no pegar tanto al borde */
+}
 
 .login-container {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 320px;
   width: 100%;
-  margin: 0 auto; 
-  margin-top: 200px;
+  max-width: 400px; /* Ajustar ancho para el formulario */
+  margin: 0 auto;
 }
 
 .login-title {
@@ -24,6 +47,7 @@
 }
 
 .login-input {
+  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -42,71 +66,53 @@
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #888;
+  background-color: #28a745; /* Color verde */
   color: white;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 10px; /* Espacio entre botones */
+  margin-bottom: 10px;
 }
 
 .login-button:hover {
-  background-color: #555;
-}
-
-.login-options {
-  text-align: center;
-  margin-top: 15px;
+  background-color: #218838; /* Verde más oscuro al pasar el mouse */
 }
 
 .forgot-password-link {
-  color: #888;
-  text-decoration: none;
+  color: #007bff; /* Azul */
+  text-decoration: underline; /* Subrayado */
   font-size: 14px;
+  cursor: pointer;
+  display: inline-block; /* Para que tome el ancho del contenido */
+  margin-top: 10px;
+  text-align: center;
+  width: 100%; /* Centrarlo horizontalmente */
 }
 
 .forgot-password-link:hover {
-  text-decoration: underline;
+  color: #0056b3; /* Azul más oscuro al pasar el mouse */
 }
 
 .register-button {
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #888;
+  background-color: #007bff; /* Color azul */
   color: white;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 100%;
   margin-top: 10px;
 }
 
 .register-button:hover {
-  background-color: #555;
+  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
 }
 
-.login-options {
-  text-align: center;
-  margin-top: 15px;
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px; /* Muestra el error justo debajo del campo */
+  margin-bottom: 10px;
+  text-align: left;
 }
-
-.forgot-password-link,
-.register-button {
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #888;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.forgot-password-link:hover,
-.register-button:hover {
-  background-color: #555;
-}
-
