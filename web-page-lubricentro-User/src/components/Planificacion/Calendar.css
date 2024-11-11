@@ -1,18 +1,26 @@
 .calendar-container {
   display: flex;
-  flex-direction: column; /* Cambiar a columna para centrar el título y los contenedores */
-  align-items: center; /* Centrar horizontalmente */
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
 
 .calendar-title {
   text-align: center;
-  margin-bottom: 20px; /* Espacio entre el título y los elementos inferiores */
+  margin-bottom: 20px;
+  font-size: 1.5em;
 }
 
-.calendar-left, .calendar-right {
-  flex: 1;
-  max-width: 45%; /* Controla el ancho de los contenedores */
+.calendar-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px; /* Controla el ancho total de los elementos internos */
+}
+
+.calendar-left,
+.calendar-right {
+  width: 45%; /* Ocupa el 45% del ancho total para cada lado */
 }
 
 .calendar-left {
@@ -26,33 +34,28 @@
 table {
   width: 100%;
   text-align: center;
-  border-collapse: collapse; /* Mejora el aspecto de la tabla */
+  border-collapse: collapse;
 }
 
 th, td {
-  padding: 10px; /* Espacio alrededor del contenido de las celdas */
-  border: 1px solid #ddd; /* Agregar un borde ligero a las celdas */
+  padding: 10px;
+  border: 1px solid #ddd;
 }
 
 button {
   width: 100%;
-  padding: 10px; /* Aumentar el padding para que los botones sean más fáciles de usar */
+  padding: 10px;
   border: none;
-  border-radius: 4px; /* Bordes redondeados para los botones */
-  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-/* Estilos para el botón de Agendar cita */
 button.agendar {
-  background-color: #28a745; /* Color verde */
+  background-color: #28a745;
   color: white;
 }
 
-/* Estilos para el botón de Cita no disponible */
 button.no-disponible {
-  background-color: #dc3545; /* Color rojo */
+  background-color: #dc3545;
   color: white;
 }
-
-
-

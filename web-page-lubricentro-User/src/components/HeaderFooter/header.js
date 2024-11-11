@@ -40,7 +40,7 @@ export default function AppHeader() {
             {isAuthenticated && (
               <>
                 <NavDropdown title="Ordenes" id="basic-nav-dropdown">
-                  <NavDropdown.Item as={NavLink} to="/listar-ordenes">
+                  <NavDropdown.Item as={NavLink} to="/orden-list">
                     Listar Ordenes
                   </NavDropdown.Item>
                 </NavDropdown>

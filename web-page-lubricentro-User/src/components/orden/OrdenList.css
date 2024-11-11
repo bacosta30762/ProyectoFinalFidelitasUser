@@ -1,0 +1,83 @@
+.orden-list-container {
+  width: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.orden-list-container h2 {
+  text-align: center; 
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.orden-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.orden-table th, .orden-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.orden-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.orden-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.orden-table tr:hover {
+  background-color: #e9ecef;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* Estilos de paginación */
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.pagination {
+  display: inline-flex; /* Cambia el display para que ocupe solo el ancho necesario */
+  align-items: center;
+  margin-top: 10px;
+  padding-right: 10px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button.active {
+  background-color: #0056b3;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}

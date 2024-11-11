@@ -10,4 +10,21 @@ input, select {
 button {
   background-color: green;
   color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.centered-toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* Asegura que esté por encima de otros elementos */
 }

@@ -14,7 +14,7 @@ const SelectService = () => {
 
   const handleServiceSelect = () => {
     if (servicioId) {
-      navigate(`/calendario?servicioID=${servicioId}`);
+      navigate('/calendario', { state: { servicioId } }); // Pasar `servicioId` como estado
     }
   };
 
@@ -22,12 +22,14 @@ const SelectService = () => {
     <div className="select-service-container">
       <h2>Seleccione un servicio</h2>
       <select
-        onChange={(e) => setServicioId(e.target.value)}
-        value={servicioId}
+        onChange={(e) => setServicioId(Number(e.target.value))}
+        value={servicioId || ''}
       >
         <option value="">Seleccione...</option>
-        {servicios.map(servicio => (
-          <option key={servicio.id} value={servicio.id}>{servicio.nombre}</option>
+        {servicios.map((servicio) => (
+          <option key={servicio.id} value={servicio.id}>
+            {servicio.nombre}
+          </option>
         ))}
       </select>
       <button onClick={handleServiceSelect}>Continuar</button>

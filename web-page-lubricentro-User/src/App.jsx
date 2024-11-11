@@ -13,7 +13,7 @@ import Home from "./components/Home/Home";
 import Calendar from "./components/Planificacion/Calendar";
 import CrearOrden from "./components/Planificacion/CrearOrden.jsx";
 import Servicio from "./components/Planificacion/seleccionarServicio.jsx";
-import FakeOrdenListPage from "./pages/FakeOrdenListPage.jsx";
+import OrdenListPage from "./components/orden/OrdenList.jsx";
 import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx";
 import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
@@ -69,10 +69,10 @@ function App() {
               }
             />
             <Route
-              path="/listar-ordenes/*"
+              path="/orden-list/*"
               element={
                 <ProtectedRoute>
-                  <FakeOrdenListPage />
+                  <OrdenListPage />
                 </ProtectedRoute>
               }
             />

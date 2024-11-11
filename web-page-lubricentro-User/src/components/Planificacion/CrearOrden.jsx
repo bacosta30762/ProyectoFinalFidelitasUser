@@ -1,13 +1,18 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { createOrderSchema } from "../Validaciones/ordenValidation";
-import ValidatedInput from "../Validaciones/inputValidation";
+import ValidatedInputOrden from "../Validaciones/ValidatedInputOrden";
+import { getToken } from "../Servicios/tokenService"; 
 import './CreateOrder.css';
+import { Toast, ToastContainer } from "react-bootstrap"; 
 
 const CreateOrdenPage = () => {
   const location = useLocation();
-  const { selectedDate, hour, serviceId } = location.state || {};
+  const navigate = useNavigate();
+  const { selectedDate, hour, servicioId } = location.state || {};
+  
+  const [showToast, setShowToast] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -16,15 +21,35 @@ const CreateOrdenPage = () => {
     validationSchema: createOrderSchema,
     onSubmit: async (values) => {
       const dto = {
-        ServicioId: serviceId,
-        PlacaVehiculo: values.vehiclePlate,
-        Hora: parseInt(hour),
-        Dia: selectedDate.toISOString().split('T')[0],
+        servicioId: servicioId,
+        placaVehiculo: values.vehiclePlate,
+        hora: parseInt(hour),
+        dia: selectedDate.toISOString().split('T')[0], 
       };
-      
-      // Enviar la solicitud de creación de orden
-      console.log("Orden creada con los siguientes datos:", dto);
-      // Aquí podrías hacer el fetch para crear la orden en tu API.
+
+      try {
+        const token = getToken();
+        const response = await fetch("https://localhost:7180/api/Ordenes/crear", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify(dto),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Error al crear la orden:", errorData);
+        } else {
+          setShowToast(true);  
+          setTimeout(() => {
+            navigate("/orden-list"); 
+          }, 2000);  
+        }
+      } catch (error) {
+        console.error("Error en la conexión:", error);
+      }
     },
   });
 
@@ -32,21 +57,46 @@ const CreateOrdenPage = () => {
     <div className="create-order-container">
       <h2>Crear Orden</h2>
       <form onSubmit={formik.handleSubmit}>
-        <ValidatedInput
+        <ValidatedInputOrden
           name="vehiclePlate"
           type="text"
           placeholder="Placa del Vehículo"
           value={formik.values.vehiclePlate}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
+          error={formik.errors.vehiclePlate}
+          touched={formik.touched.vehiclePlate}
         />
-        {formik.touched.vehiclePlate && formik.errors.vehiclePlate ? (
-          <div className="error">{formik.errors.vehiclePlate}</div>
-        ) : null}
+        <div>
+          <strong>Servicio ID:</strong> {servicioId}
+        </div>
+        <div>
+          <strong>Fecha:</strong>{" "}
+          {selectedDate ? selectedDate.toLocaleDateString() : "No seleccionado"}
+        </div>
+        <div>
+          <strong>Hora:</strong> {hour ? `${hour}:00` : "No seleccionada"}
+        </div>
         <button type="submit">Crear Orden</button>
       </form>
+
+      {/* Toast de éxito */}
+      <ToastContainer className="p-3 centered-toast" position="middle-center">
+        <Toast
+          onClose={() => setShowToast(false)}
+          show={showToast}
+          delay={3000}
+          autohide
+        >
+          <Toast.Header>
+            <strong className="me-auto">Éxito</strong>
+          </Toast.Header>
+          <Toast.Body>Orden creada con éxito!</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 };
 
 export default CreateOrdenPage;
+
