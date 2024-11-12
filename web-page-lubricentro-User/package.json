@@ -16,7 +16,6 @@
     "bootstrap": "^5.3.3",
     "file-saver": "^2.0.5",
     "formik": "^2.4.6",
-    "gh-pages": "^6.2.0",
     "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
@@ -35,7 +34,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -b main",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -60,6 +59,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "gh-pages": "^6.2.0"
   }
 }

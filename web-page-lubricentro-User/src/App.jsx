@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppHeader from "./components/HeaderFooter/header";
 import UserNotificationsPage from "./pages/UserNotificationsPage";
 import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter basename="/ProyectoFinalFidelitasUser">
         <header id="header">
           <AppHeader />
         </header>
@@ -64,7 +64,7 @@ function App() {
               path="/select-servicio/*"
               element={
                 <ProtectedRoute>
-                  <Servicio  />
+                  <Servicio />
                 </ProtectedRoute>
               }
             />
@@ -120,12 +120,13 @@ function App() {
             {/* Nueva ruta para Crear Suscripción */}
           </Routes>
         </main>
-      </Router>
-      <footer id="footer">
-        <Footer />
-      </footer>
+        <footer id="footer">
+          <Footer />
+        </footer>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
