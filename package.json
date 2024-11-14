@@ -33,8 +33,6 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "cross-env GH_PAGES_NO_CLEAN=1 gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
