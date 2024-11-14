@@ -18,10 +18,8 @@ import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx";
 import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import RestablecerPassword from "./components/Login/RestablecerPassword.jsx";
-import { getToken } from "./components/Servicios/tokenService";
 
 function App() {
-  const token = getToken(); // Usar getToken() para verificar si el usuario está autenticado
 
   return (
     <div className="App">
