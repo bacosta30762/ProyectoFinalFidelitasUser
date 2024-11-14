@@ -34,7 +34,7 @@ const Home = () => {
       </Carousel>
 
       <section className="services-section">
-        <h2 className="services-title">Nuestros Servicios</h2>
+        <h2 className="services-title">Servicios que Ofrecemos</h2>
         <div className="services-container">
           <div className="service-item">
             <FaOilCan className="service-icon" />
@@ -42,11 +42,11 @@ const Home = () => {
           </div>
           <div className="service-item">
             <FaBalanceScale className="service-icon" />
-            <h3>Balanceo</h3>
+            <h3>Balanceo de llantas</h3>
           </div>
           <div className="service-item">
             <FaCarCrash className="service-icon" />
-            <h3>Frenos</h3>
+            <h3>Chequeo de Frenos</h3>
           </div>
           <div className="service-item">
             <FaDiagnoses className="service-icon" />
