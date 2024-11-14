@@ -12,16 +12,13 @@ jobs:
     steps:
       # 1. Checkout del código fuente
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          # Usar la última versión compatible
-          node-version: '20'
+        uses: actions/checkout@v4
 
       # 2. Configurar Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Especifica Node.js 20
+          node-version: 20  # Cambia esto si usas otra versión de Node.js
           cache: 'npm'
 
       # 3. Instalar dependencias
