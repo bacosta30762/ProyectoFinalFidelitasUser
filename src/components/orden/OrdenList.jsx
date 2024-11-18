@@ -10,12 +10,15 @@ const OrdenList = () => {
   useEffect(() => {
     const fetchOrdenes = async () => {
       const token = getToken();
-      const response = await fetch("https://localhost:7180/api/Ordenes/listar-ordenes-usuario", {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://localhost:7180/api/Ordenes/listar-ordenes-usuario",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         setOrdenes(data);
@@ -29,12 +32,15 @@ const OrdenList = () => {
 
   const deleteOrder = async (id) => {
     const token = getToken();
-    const response = await fetch(`https://localhost:7180/api/Ordenes/Eliminarorden${id}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `https://localhost:7180/api/Ordenes/Eliminarorden${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (response.ok) {
       setOrdenes(ordenes.filter((orden) => orden.numeroOrden !== id));
     } else {
