@@ -4,7 +4,7 @@ import { getToken } from "../Servicios/tokenService";
 export const horasApi = createApi({
   reducerPath: 'horasApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://localhost:7180/api/Ordenes',
+    baseUrl: 'https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Ordenes',
     prepareHeaders: (headers) => {
       const token = getToken();
       if (token) {

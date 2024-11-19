@@ -11,7 +11,7 @@ const OrdenList = () => {
     const fetchOrdenes = async () => {
       const token = getToken();
       const response = await fetch(
-        "https://localhost:7180/api/Ordenes/listar-ordenes-usuario",
+        "https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Ordenes/listar-ordenes-usuario",
         {
           method: "GET",
           headers: {
@@ -33,7 +33,7 @@ const OrdenList = () => {
   const deleteOrder = async (id) => {
     const token = getToken();
     const response = await fetch(
-      `https://localhost:7180/api/Ordenes/Eliminarorden${id}`,
+      `https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Ordenes/Eliminarorden${id}`,
       {
         method: "DELETE",
         headers: {

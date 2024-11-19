@@ -29,7 +29,7 @@ const Perfileditar = () => {
         const cedula = decodedToken.Cedula;
 
         const response = await fetch(
-          `https://localhost:7180/api/Usuarios/ObtenerUsuario/${cedula}`,
+          `https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/ObtenerUsuario/${cedula}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ const Perfileditar = () => {
         const cedula = decodedToken.Cedula;
 
         const response = await fetch(
-          `https://localhost:7180/api/Usuarios/Actualizar/${cedula}`,
+          `https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/Actualizar/${cedula}`,
           {
             method: "PUT",
             headers: {
