@@ -22,7 +22,7 @@ const Registro = () => {
     };
 
     try {
-      const response = await fetch("https://localhost:7180/api/Usuarios/Registrar", {
+      const response = await fetch("https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/Registrar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
