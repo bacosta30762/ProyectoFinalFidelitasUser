@@ -73,7 +73,7 @@ const Perfileditar = () => {
         const cedula = decodedToken.Cedula;
 
         const response = await fetch(
-          `https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/Actualizar/${cedula}`,
+          `${process.env.REACT_APP_API_URL}/api/Usuarios/Actualizar/${cedula}`,
           {
             method: "PUT",
             headers: {

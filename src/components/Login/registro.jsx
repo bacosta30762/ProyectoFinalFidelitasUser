@@ -22,7 +22,7 @@ const Registro = () => {
     };
 
     try {
-      const response = await fetch("https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/Registrar", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/Usuarios/Registrar`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

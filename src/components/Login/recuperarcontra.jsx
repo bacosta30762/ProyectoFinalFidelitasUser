@@ -14,7 +14,7 @@ const RecoverPassword = () => {
     const recuperarPasswordDto = { correo: values.email };
 
     try {
-      const response = await fetch('https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/RecuperarContraseña', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/Usuarios/RecuperarContraseña`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

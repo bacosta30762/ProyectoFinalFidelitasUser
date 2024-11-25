@@ -31,7 +31,7 @@ const Profile = () => {
         }
 
         const response = await fetch(
-          `https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/ObtenerUsuario/${cedula}`,
+          `${process.env.REACT_APP_API_URL}/api/Usuarios/ObtenerUsuario/${cedula}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

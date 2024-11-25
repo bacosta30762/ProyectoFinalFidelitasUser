@@ -19,7 +19,7 @@ const RestablecerPassword = () => {
     };
 
     try {
-      const response = await fetch('https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/Usuarios/restablecer-password', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/Usuarios/restablecer-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

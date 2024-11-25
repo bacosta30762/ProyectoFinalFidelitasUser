@@ -29,7 +29,7 @@ const CreateOrdenPage = () => {
 
       try {
         const token = getToken();
-        const response = await fetch("https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Ordenes/crear", {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/Ordenes/crear`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

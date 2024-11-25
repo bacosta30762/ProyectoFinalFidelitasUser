@@ -27,6 +27,8 @@ jobs:
 
       # 4. Construir la aplicación
       - name: Build the React app
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL_PROD }}
         run: npm run build
 
       # 5. Desplegar a GitHub Pages

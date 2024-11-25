@@ -4,7 +4,7 @@ import { getToken } from "../Servicios/tokenService";
 export const horasApi = createApi({
   reducerPath: 'horasApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Ordenes',
+    baseUrl: `${process.env.REACT_APP_API_URL}/api/Ordenes`,
     prepareHeaders: (headers) => {
       const token = getToken();
       if (token) {
@@ -16,6 +16,7 @@ export const horasApi = createApi({
   endpoints: (builder) => ({
     obtenerHorasDisponibles: builder.query({
       query: ({ servicioId, dia }) => `horas-disponibles?servicioId=${servicioId}&dia=${dia}`,
+      keepUnusedDataFor: 0,
     }),
   }),
 });

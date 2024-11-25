@@ -17,7 +17,7 @@ const Login = () => {
     };
 
     try {
-      const response = await fetch("https://apirymlubricentro-dddjebcxhyf6hse7.centralus-01.azurewebsites.net/api/Usuarios/Login", {
+      const response = await fetch("https://localhost:7180/api/Usuarios/Login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
