@@ -34,7 +34,7 @@ const Home = () => {
       </Carousel>
 
       <section className="services-section">
-        <h2 className="services-title">Servicios que Ofrecemos</h2>
+        <h2 className="services-title">Servicios que brindamos</h2>
         <div className="services-container">
           <div className="service-item">
             <FaOilCan className="service-icon" />
