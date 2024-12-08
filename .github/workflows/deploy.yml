@@ -29,7 +29,9 @@ jobs:
       - name: Build the React app
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL_PROD }}
-        run: npm run build
+        run: |
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL_PROD }}" >> .env.production
+          npm run build
 
       # 5. Desplegar a GitHub Pages
       - name: Deploy to GitHub Pages
