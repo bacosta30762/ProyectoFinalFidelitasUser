@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppHeader from "./components/HeaderFooter/header";
-import UserNotificationsPage from "./pages/UserNotificationsPage";
 import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
 import Footer from "./components/HeaderFooter/Footer";
 import Login from "./components/Login/login.jsx";
@@ -14,8 +13,6 @@ import Calendar from "./components/Planificacion/Calendar";
 import CrearOrden from "./components/Planificacion/CrearOrden.jsx";
 import Servicio from "./components/Planificacion/seleccionarServicio.jsx";
 import OrdenListPage from "./components/orden/OrdenList.jsx";
-import CrearSuscripcionPage from "./pages/CrearSuscripcionPage.jsx";
-import VerSuscripcionesPage from "./pages/VerSuscripcionesPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import RestablecerPassword from "./components/Login/RestablecerPassword.jsx";
 
@@ -75,14 +72,6 @@ function App() {
               }
             />
             <Route
-              path="notifications"
-              element={
-                <ProtectedRoute>
-                  <UserNotificationsPage />
-                </ProtectedRoute>
-              }
-            />
-            <Route
               path="/perfileditar/:id"
               element={
                 <ProtectedRoute>
@@ -98,24 +87,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/ver-suscripciones"
-              element={
-                <ProtectedRoute>
-                  <VerSuscripcionesPage />
-                </ProtectedRoute>
-              }
-            />{" "}
-            {/* Nueva ruta para Ver Suscripciones */}
-            <Route
-              path="/crear-suscripcion"
-              element={
-                <ProtectedRoute>
-                  <CrearSuscripcionPage />
-                </ProtectedRoute>
-              }
-            />{" "}
-            {/* Nueva ruta para Crear Suscripción */}
           </Routes>
         </main>
         <footer id="footer">
