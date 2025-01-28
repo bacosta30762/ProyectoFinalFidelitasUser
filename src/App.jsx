@@ -19,7 +19,7 @@ import RestablecerPassword from "./components/Login/RestablecerPassword.jsx";
 function App() {
   return (
     <div className="App">
-      <HashRouter basename="/ProyectoFinalFidelitasUser">
+      <HashRouter>
         <header id="header">
           <AppHeader />
         </header>
