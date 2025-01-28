@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import AppHeader from "./components/HeaderFooter/header";
 import ComentariosValoraciones from "./components/Comentarios/ComentariosValoraciones";
 import Footer from "./components/HeaderFooter/Footer";
@@ -17,10 +17,9 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import RestablecerPassword from "./components/Login/RestablecerPassword.jsx";
 
 function App() {
-
   return (
     <div className="App">
-      <BrowserRouter basename="/ProyectoFinalFidelitasUser">
+      <HashRouter basename="/ProyectoFinalFidelitasUser">
         <header id="header">
           <AppHeader />
         </header>
@@ -92,10 +91,9 @@ function App() {
         <footer id="footer">
           <Footer />
         </footer>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
 
 export default App;
-
