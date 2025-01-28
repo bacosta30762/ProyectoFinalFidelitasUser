@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ProyectoFinalFidelitasUser/static/css/main.4f86f54b.css",
-    "main.js": "/ProyectoFinalFidelitasUser/static/js/main.1691b49e.js",
+    "main.js": "/ProyectoFinalFidelitasUser/static/js/main.ea5d3208.js",
     "static/media/Taller_1280.jpg": "/ProyectoFinalFidelitasUser/static/media/Taller_1280.deb996b20ec62f4ce769.jpg",
     "static/media/Motocicleta_1280.jpg": "/ProyectoFinalFidelitasUser/static/media/Motocicleta_1280.8cc37bf2dc1b2197a156.jpg",
     "static/media/Motor_1280.jpg": "/ProyectoFinalFidelitasUser/static/media/Motor_1280.7af35038438106019519.jpg",
     "index.html": "/ProyectoFinalFidelitasUser/index.html",
     "main.4f86f54b.css.map": "/ProyectoFinalFidelitasUser/static/css/main.4f86f54b.css.map",
-    "main.1691b49e.js.map": "/ProyectoFinalFidelitasUser/static/js/main.1691b49e.js.map"
+    "main.ea5d3208.js.map": "/ProyectoFinalFidelitasUser/static/js/main.ea5d3208.js.map"
   },
   "entrypoints": [
     "static/css/main.4f86f54b.css",
-    "static/js/main.1691b49e.js"
+    "static/js/main.ea5d3208.js"
   ]
 }
